@@ -1,0 +1,7 @@
+{
+  "name": "ionic4-swipeable-tabs",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
