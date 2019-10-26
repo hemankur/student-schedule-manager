@@ -40,5 +40,6 @@ export class WelcomePage implements OnInit {
             .catch(err => {
                 console.log(err);
             });
+        // ok comment
     }
 }
