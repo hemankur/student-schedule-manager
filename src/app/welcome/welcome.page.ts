@@ -1,24 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
+import {UserService} from '../services/api/user.service';
+import {passBoolean} from 'protractor/built/util';
 
 @Component({
-  selector: 'app-welcome',
-  templateUrl: './welcome.page.html',
-  styleUrls: ['./welcome.page.scss'],
+    selector: 'app-welcome',
+    templateUrl: './welcome.page.html',
+    styleUrls: ['./welcome.page.scss'],
 })
 export class WelcomePage implements OnInit {
 
-  constructor(private navCtrl: NavController) {
-  }
+    private username: string;
+    private password: string;
 
-  ngOnInit() {
+    constructor(private navCtrl: NavController, private userService: UserService) {
+    }
 
-  }
+    ngOnInit() {
 
-  login() {
-    this.navCtrl.navigateForward('tabs/tab1')
-        .catch(err => {
-          console.log(err);
-        });
-  }
+    }
+
+    login() {
+
+      const userData = {
+        username: this.username,
+        password: this.password,
+      };
+      console.log(userData);
+        this.userService.userLogin(userData)
+            .then((data: any) => {
+              console.log(data);
+              if (data.message === 'success') {
+                this.navCtrl.navigateForward('tabs/tab1')
+                    .catch(err => {
+                      console.log(err);
+                    });
+              }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 }
