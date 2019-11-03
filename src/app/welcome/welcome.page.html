@@ -8,4 +8,5 @@
     <ion-input placeholder="username" id="login-username" [(ngModel)]="username"></ion-input>
     <ion-input type="password" placeholder="password" id="login-password" [(ngModel)]="password"></ion-input>
     <ion-button (click)="login()" id="login-button">Log in</ion-button>
+    <ion-button (click)="navCtrl.navigateForward('/tabs/tab2')">Debug Continue</ion-button>
 </ion-content>
