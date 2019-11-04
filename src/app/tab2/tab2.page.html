@@ -8,39 +8,65 @@
 
 <ion-content>
 
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            Filters
+        </mat-expansion-panel-header>
+        <ion-label>
+            <ion-checkbox></ion-checkbox>
+            Graduate
+        </ion-label>
+        <ion-label>
+            <ion-checkbox></ion-checkbox>
+            Undergraduate
+        </ion-label>
+
+        <mat-action-row>
+            <button mat-button>Apply!</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+
     <mat-form-field>
         <label>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
         </label>
     </mat-form-field>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.courseID}} </td>
+        <!-- Course ID Column -->
+        <ng-container matColumnDef="course" sticky>
+            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Course</th>
+            <td mat-cell *matCellDef="let element"> {{element.department}} {{element.courseNumber}} </td>
         </ng-container>
 
-        <!-- Name Column -->
+        <!-- Course Name Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.department}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Weight </th>
+            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Course Name</th>
             <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
         </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Symbol </th>
+        <!-- Instructor Column -->
+        <ng-container matColumnDef="instructor">
+            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Instructor</th>
             <td mat-cell *matCellDef="let element"> {{element.instructor}} </td>
+        </ng-container>
+
+        <!-- Day Column -->
+        <ng-container matColumnDef="time">
+            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Time</th>
+            <td mat-cell *matCellDef="let element"> {{element.day}} {{element.time}} </td>
+        </ng-container>
+
+        <!-- Location Column -->
+        <ng-container matColumnDef="location" stickyEnd>
+            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Location</th>
+            <td mat-cell *matCellDef="let element"> {{element.location}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </ion-content>

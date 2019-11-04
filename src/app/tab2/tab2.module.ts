@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import {MaterialModule} from '../material.module';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import {MaterialModule} from '../material.module';
         CommonModule,
         FormsModule,
         RouterModule.forChild([{path: '', component: Tab2Page}]),
-        MaterialModule
+        MaterialModule,
+        MatExpansionModule
     ],
   declarations: [Tab2Page]
 })
