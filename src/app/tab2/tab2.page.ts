@@ -3,6 +3,7 @@ import {CoursesService} from '../services/api/courses.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
     selector: 'app-tab2',
@@ -25,6 +26,7 @@ export class Tab2Page implements OnInit {
     private graduateCheckbox: boolean;
     private undergraduateCheckbox: boolean;
     private term: string;
+    private instructorList = [];
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -60,13 +62,20 @@ export class Tab2Page implements OnInit {
     customFilter() {
         this.filterList = this.courseList;
         this.filterList = this.filterList.filter((course) => {
-            console.log(this.graduateCheckbox + ' ' + this.undergraduateCheckbox);
             if (this.graduateCheckbox && !this.undergraduateCheckbox) {
                 return course.courseNumber >= 500 && course.term.toLowerCase() === this.term.toLowerCase();
             } else if (this.undergraduateCheckbox && !this.graduateCheckbox) {
                 return course.courseNumber < 500 && course.term.toLowerCase() === this.term.toLowerCase();
             } else {
                 return course.term.toLowerCase() === this.term.toLowerCase();
+            }
+        });
+        this.filterList = this.filterList.filter((course) => {
+            console.log(course.instructor);
+            for (const i of this.instructorList) {
+                if (i === course.instructor) {
+                    return true;
+                }
             }
         });
         this.dataSource.data = this.filterList;

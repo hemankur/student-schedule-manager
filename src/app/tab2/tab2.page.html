@@ -42,11 +42,11 @@
 
             <ion-item>
                 <ion-label>Instructor</ion-label>
-                <ion-select multiple="true">
-                    <ion-select-option value="mneary" selected>Michael Patrick Neary</ion-select-option>
-                    <ion-select-option value="hgreenwald">Harold M Greenwald</ion-select-option>
-                    <ion-select-option value="iavramovic" selected>Ivan Avramovic</ion-select-option>
-                    <ion-select-option value="ssoundararajan">Shvetha Soundararajan</ion-select-option>
+                <ion-select multiple="true" [(ngModel)]="instructorList">
+                    <ion-select-option value="Michael Patrick Neary" selected>Michael Patrick Neary</ion-select-option>
+                    <ion-select-option value="Harold M Greenwald">Harold M Greenwald</ion-select-option>
+                    <ion-select-option value="Ivan Avramovic" selected>Ivan Avramovic</ion-select-option>
+                    <ion-select-option value="Shvetha Soundararajan">Shvetha Soundararajan</ion-select-option>
                 </ion-select>
             </ion-item>
 
