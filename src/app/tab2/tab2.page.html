@@ -27,7 +27,7 @@
 
             <ion-item>
                 <ion-label>Subjects</ion-label>
-                <ion-select multiple="true" cancelText="Cancel" okText="Okay!">
+                <ion-select multiple="true" cancelText="Cancel" okText="Okay!" [(ngModel)]="departmentList">
                     <ion-select-option value="cs">Computer Science</ion-select-option>
                     <ion-select-option value="swe">Software Engineering</ion-select-option>
                     <ion-select-option value="isa">Information Security Assurance</ion-select-option>
@@ -47,6 +47,7 @@
                     <ion-select-option value="Harold M Greenwald">Harold M Greenwald</ion-select-option>
                     <ion-select-option value="Ivan Avramovic" selected>Ivan Avramovic</ion-select-option>
                     <ion-select-option value="Shvetha Soundararajan">Shvetha Soundararajan</ion-select-option>
+                    <ion-select-option value="Robert G Kurtz">Robert G Kurtz</ion-select-option>
                 </ion-select>
             </ion-item>
 

@@ -27,6 +27,7 @@ export class Tab2Page implements OnInit {
     private undergraduateCheckbox: boolean;
     private term: string;
     private instructorList = [];
+    private departmentList = [];
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -41,7 +42,7 @@ export class Tab2Page implements OnInit {
     }
 
     private initializeValues() {
-        this.term = 'fall19';
+        this.term = 'spring20';
         this.graduateCheckbox = false;
         this.undergraduateCheckbox = false;
     }
@@ -49,7 +50,6 @@ export class Tab2Page implements OnInit {
     private getCourses() {
         this.coursesService.getCourses().then((res: any) => {
             this.courseList = res.data;
-            console.log(this.courseList);
             this.dataSource.data = this.courseList;
         }).then(() => {
             this.customFilter();
@@ -71,9 +71,15 @@ export class Tab2Page implements OnInit {
             }
         });
         this.filterList = this.filterList.filter((course) => {
-            console.log(course.instructor);
             for (const i of this.instructorList) {
                 if (i === course.instructor) {
+                    return true;
+                }
+            }
+        });
+        this.filterList = this.filterList.filter((course) => {
+            for (const dept of this.departmentList) {
+                if (dept.toLowerCase() === course.department.toLowerCase()) {
                     return true;
                 }
             }
