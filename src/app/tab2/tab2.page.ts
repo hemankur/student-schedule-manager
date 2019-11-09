@@ -21,6 +21,10 @@ export class Tab2Page implements OnInit {
 
     public name: string;
     private courseList: any;
+    private filterList: any;
+    private graduateCheckbox: boolean;
+    private undergraduateCheckbox: boolean;
+    private term: string;
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -28,19 +32,43 @@ export class Tab2Page implements OnInit {
     }
 
     ngOnInit(): void {
+        this.initializeValues();
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.getCourses();
     }
 
+    private initializeValues() {
+        this.term = 'fall19';
+        this.graduateCheckbox = false;
+        this.undergraduateCheckbox = false;
+    }
+
     private getCourses() {
         this.coursesService.getCourses().then((res: any) => {
-            console.log(res);
             this.courseList = res.data;
             console.log(this.courseList);
             this.dataSource.data = this.courseList;
+        }).then(() => {
+            this.customFilter();
         }).catch(err => {
             console.log(err);
         });
+    }
+
+
+    customFilter() {
+        this.filterList = this.courseList;
+        this.filterList = this.filterList.filter((course) => {
+            console.log(this.graduateCheckbox + ' ' + this.undergraduateCheckbox);
+            if (this.graduateCheckbox && !this.undergraduateCheckbox) {
+                return course.courseNumber >= 500 && course.term.toLowerCase() === this.term.toLowerCase();
+            } else if (this.undergraduateCheckbox && !this.graduateCheckbox) {
+                return course.courseNumber < 500 && course.term.toLowerCase() === this.term.toLowerCase();
+            } else {
+                return course.term.toLowerCase() === this.term.toLowerCase();
+            }
+        });
+        this.dataSource.data = this.filterList;
     }
 }

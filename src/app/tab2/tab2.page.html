@@ -13,40 +13,61 @@
             Filters
         </mat-expansion-panel-header>
         <ion-label>
-            <ion-checkbox></ion-checkbox>
+            <ion-checkbox [(ngModel)]="graduateCheckbox"></ion-checkbox>
             Graduate
         </ion-label>
         <ion-label>
-            <ion-checkbox></ion-checkbox>
+            <ion-checkbox [(ngModel)]="undergraduateCheckbox"></ion-checkbox>
             Undergraduate
         </ion-label>
 
+
+        <ion-list>
+            <ion-list-header>Advanced Filters</ion-list-header>
+
+            <ion-item>
+                <ion-label>Subjects</ion-label>
+                <ion-select multiple="true" cancelText="Cancel" okText="Okay!">
+                    <ion-select-option value="cs">Computer Science</ion-select-option>
+                    <ion-select-option value="swe">Software Engineering</ion-select-option>
+                    <ion-select-option value="isa">Information Security Assurance</ion-select-option>
+                    <ion-select-option value="infs">Information Systems</ion-select-option>
+                    <ion-select-option value="acct">Accounting</ion-select-option>
+                    <ion-select-option value="math">Mathematics</ion-select-option>
+                    <ion-select-option value="law">LAW</ion-select-option>
+                    <ion-select-option value="game">Computer Game Design</ion-select-option>
+                    <ion-select-option value="latin">Latin</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Instructor</ion-label>
+                <ion-select multiple="true">
+                    <ion-select-option value="mneary" selected>Michael Patrick Neary</ion-select-option>
+                    <ion-select-option value="hgreenwald">Harold M Greenwald</ion-select-option>
+                    <ion-select-option value="iavramovic" selected>Ivan Avramovic</ion-select-option>
+                    <ion-select-option value="ssoundararajan">Shvetha Soundararajan</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Term</ion-label>
+                <ion-select placeholder="Select One">
+                    <ion-select-option value="spring20">Spring 2020</ion-select-option>
+                    <ion-select-option value="fall19">Fall 2019</ion-select-option>
+                    <ion-select-option value="spring20">Spring 2019</ion-select-option>
+                    <ion-select-option value="fall19">Fall 2018</ion-select-option>
+                    <ion-select-option value="spring20">Spring 2018</ion-select-option>
+                    <ion-select-option value="fall19">Fall 2017</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+
+
         <mat-action-row>
-            <button mat-button>Apply!</button>
+            <button mat-button (click)="customFilter()">Apply!</button>
         </mat-action-row>
-        <mat-accordion>
-
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    This is the expansion 1 title
-                </mat-expansion-panel-header>
-
-                This the expansion 1 content
-
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    This is the expansion 2 title
-                </mat-expansion-panel-header>
-
-                This the expansion 2 content
-
-            </mat-expansion-panel>
-
-        </mat-accordion>
     </mat-expansion-panel>
-
 
     <mat-form-field>
         <label>
