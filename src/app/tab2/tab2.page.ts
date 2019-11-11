@@ -106,4 +106,12 @@ export class Tab2Page implements OnInit {
             });
         console.log(row);
     }
+
+    resetFilters() {
+        this.instructorList = [];
+        this.departmentList = [];
+        this.graduateCheckbox = false;
+        this.undergraduateCheckbox = false;
+        this.customFilter();
+    }
 }
