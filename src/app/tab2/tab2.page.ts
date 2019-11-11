@@ -16,7 +16,7 @@ export class Tab2Page implements OnInit {
     constructor(private coursesService: CoursesService, private navController: NavController, private storage: Storage) {
     }
 
-    displayedColumns: string[] = ['course', 'name', 'instructor', 'time', 'location', 'term', 'star'];
+    displayedColumns: string[] = ['course', 'name', 'instructor', 'time', 'location', 'term', 'active'];
     dataSource = new MatTableDataSource<any>([]);
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
