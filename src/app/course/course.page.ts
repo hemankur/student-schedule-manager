@@ -33,4 +33,20 @@ export class CoursePage implements OnInit {
             console.log(err);
         });
     }
+
+    unregister() {
+        this.storage.get('userData').then(userData => {
+            this.storage.get('courseDetails').then(course => {
+                this.coursesService.unregister({sid: userData.username, courseID: course.courseID})
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 }

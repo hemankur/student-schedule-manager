@@ -14,7 +14,11 @@ export class CoursesService {
         return this.http.get(SERVER_URL + '/api/courses/').toPromise();
     }
 
-    register(courseID) {
-        return this.http.post(SERVER_URL + '/api/courses/register/', courseID).toPromise();
+    register(userData) {
+        return this.http.post(SERVER_URL + '/api/courses/register/', userData).toPromise();
+    }
+
+    unregister(userData) {
+        return this.http.patch(SERVER_URL + '/api/courses/unregister/', userData).toPromise();
     }
 }
