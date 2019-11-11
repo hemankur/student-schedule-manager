@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import {IonicStorageModule} from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
       MaterialModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,

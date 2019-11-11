@@ -13,4 +13,8 @@ export class CoursesService {
     getCourses() {
         return this.http.get(SERVER_URL + '/api/courses/').toPromise();
     }
+
+    register(courseID) {
+        return this.http.post(SERVER_URL + '/api/courses/register/', courseID).toPromise();
+    }
 }
