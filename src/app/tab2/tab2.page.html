@@ -53,7 +53,7 @@
 
             <ion-item>
                 <ion-label>Term</ion-label>
-                <ion-select placeholder="Select One">
+                <ion-select placeholder="Select One" [(ngModel)]="term">
                     <ion-select-option value="spring20">Spring 2020</ion-select-option>
                     <ion-select-option value="fall19">Fall 2019</ion-select-option>
                     <ion-select-option value="spring20">Spring 2019</ion-select-option>
@@ -76,41 +76,57 @@
         </label>
     </mat-form-field>
 
-    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+    <div class="example-container mat-elevation-z8">
+        <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
 
-        <!-- Course ID Column -->
-        <ng-container matColumnDef="course" sticky>
-            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Course</th>
-            <td mat-cell *matCellDef="let element"> {{element.department}} {{element.courseNumber}} </td>
-        </ng-container>
+            <!-- Course ID Column -->
+            <ng-container matColumnDef="course" sticky>
+                <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Course</th>
+                <td mat-cell *matCellDef="let element"> {{element.department}} {{element.courseNumber}} </td>
+            </ng-container>
 
-        <!-- Course Name Column -->
-        <ng-container matColumnDef="name">
-            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Course Name</th>
-            <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
-        </ng-container>
+            <!-- Course Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Course Name</th>
+                <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+            </ng-container>
 
-        <!-- Instructor Column -->
-        <ng-container matColumnDef="instructor">
-            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Instructor</th>
-            <td mat-cell *matCellDef="let element"> {{element.instructor}} </td>
-        </ng-container>
+            <!-- Instructor Column -->
+            <ng-container matColumnDef="instructor">
+                <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Instructor</th>
+                <td mat-cell *matCellDef="let element"> {{element.instructor}} </td>
+            </ng-container>
 
-        <!-- Day Column -->
-        <ng-container matColumnDef="time">
-            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Time</th>
-            <td mat-cell *matCellDef="let element"> {{element.day}} {{element.time}} </td>
-        </ng-container>
+            <!-- Day Column -->
+            <ng-container matColumnDef="time">
+                <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Time</th>
+                <td mat-cell *matCellDef="let element"> {{element.day}} {{element.time}} </td>
+            </ng-container>
 
-        <!-- Location Column -->
-        <ng-container matColumnDef="location" stickyEnd>
-            <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Location</th>
-            <td mat-cell *matCellDef="let element"> {{element.location}} </td>
-        </ng-container>
+            <!-- Location Column -->
+            <ng-container matColumnDef="location">
+                <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Location</th>
+                <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+            <!-- Term Column -->
+            <ng-container matColumnDef="term">
+                <th mat-header-cell [mat-sort-header] *matHeaderCellDef> Term</th>
+                <td mat-cell *matCellDef="let element"> {{element.term}} </td>
+            </ng-container>
+
+            <!-- Star Column -->
+            <ng-container matColumnDef="star" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon>more_vert</mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onClickCourse(row)"></tr>
+        </table>
+    </div>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </ion-content>

@@ -3,7 +3,8 @@ import {CoursesService} from '../services/api/courses.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
+import {NavController} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-tab2',
@@ -12,10 +13,10 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
 })
 export class Tab2Page implements OnInit {
 
-    constructor(private coursesService: CoursesService) {
+    constructor(private coursesService: CoursesService, private navController: NavController, private storage: Storage) {
     }
 
-    displayedColumns: string[] = ['course', 'name', 'instructor', 'time', 'location'];
+    displayedColumns: string[] = ['course', 'name', 'instructor', 'time', 'location', 'term', 'star'];
     dataSource = new MatTableDataSource<any>([]);
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -70,20 +71,39 @@ export class Tab2Page implements OnInit {
                 return course.term.toLowerCase() === this.term.toLowerCase();
             }
         });
-        this.filterList = this.filterList.filter((course) => {
-            for (const i of this.instructorList) {
-                if (i === course.instructor) {
-                    return true;
+        if (this.instructorList.length !== 0) {
+            this.filterList = this.filterList.filter((course) => {
+                for (const i of this.instructorList) {
+                    if (i === course.instructor) {
+                        return true;
+                    }
                 }
-            }
-        });
-        this.filterList = this.filterList.filter((course) => {
-            for (const dept of this.departmentList) {
-                if (dept.toLowerCase() === course.department.toLowerCase()) {
-                    return true;
+            });
+        }
+        console.log(this.instructorList.length);
+        if (this.departmentList.length !== 0) {
+            this.filterList = this.filterList.filter((course) => {
+                for (const dept of this.departmentList) {
+                    if (dept.toLowerCase() === course.department.toLowerCase()) {
+                        return true;
+                    }
                 }
-            }
-        });
+            });
+        }
         this.dataSource.data = this.filterList;
+    }
+
+    onClickCourse(row) {
+        this.storage.set('courseDetails', row)
+            .then(() => {
+                this.navController.navigateForward('course')
+                    .catch(err => {
+                        console.log(err);
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        console.log(row);
     }
 }
