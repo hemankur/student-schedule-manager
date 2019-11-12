@@ -13,8 +13,12 @@ export class UserService {
     /**
      * Get the user details for everyone from the server
      */
-    getUsers() {
-        return this.http.get(SERVER_URL + '/api/users/').toPromise();
+    getUserPreferences(username) {
+        return this.http.get(SERVER_URL + '/api/users/preferences/' + username).toPromise();
+    }
+
+    postUserPreferences(userData) {
+        return this.http.post(SERVER_URL + '/api/users/preferences', userData).toPromise();
     }
 
     userLogin(userData) {

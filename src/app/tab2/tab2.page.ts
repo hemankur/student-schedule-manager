@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {NavController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
+import {UserService} from '../services/api/user.service';
 
 @Component({
     selector: 'app-tab2',
@@ -12,8 +13,10 @@ import {Storage} from '@ionic/storage';
     styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page implements OnInit {
+    private itemPerPage: number;
 
-    constructor(private coursesService: CoursesService, private navController: NavController, private storage: Storage) {
+    constructor(private coursesService: CoursesService, private navController: NavController,
+                private storage: Storage, private userService: UserService) {
     }
 
     displayedColumns: string[] = ['course', 'name', 'instructor', 'time', 'location', 'term', 'active'];
@@ -32,20 +35,23 @@ export class Tab2Page implements OnInit {
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
-        console.log(this.dataSource);
     }
 
     ngOnInit(): void {
         this.initializeValues();
+        this.getCourses();
+        this.getPreferences();
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.getCourses();
     }
 
     private initializeValues() {
         this.term = 'spring20';
         this.graduateCheckbox = false;
         this.undergraduateCheckbox = false;
+        this.departmentList = [];
+        this.instructorList = [];
+        this.itemPerPage = 10;
     }
 
     private getCourses() {
@@ -53,15 +59,16 @@ export class Tab2Page implements OnInit {
             this.courseList = res.data;
             this.dataSource.data = this.courseList;
         }).then(() => {
-            this.customFilter();
+            this.customFilter()
+                .catch(err => console.log(err));
         }).catch(err => {
             console.log(err);
         });
     }
 
 
-    customFilter() {
-        this.filterList = this.courseList;
+    async customFilter() {
+        this.filterList = await this.courseList;
         this.filterList = this.filterList.filter((course) => {
             if (this.graduateCheckbox && !this.undergraduateCheckbox) {
                 return course.courseNumber >= 500 && course.term.toLowerCase() === this.term.toLowerCase();
@@ -80,7 +87,6 @@ export class Tab2Page implements OnInit {
                 }
             });
         }
-        console.log(this.instructorList.length);
         if (this.departmentList.length !== 0) {
             this.filterList = this.filterList.filter((course) => {
                 for (const dept of this.departmentList) {
@@ -112,6 +118,41 @@ export class Tab2Page implements OnInit {
         this.departmentList = [];
         this.graduateCheckbox = false;
         this.undergraduateCheckbox = false;
+        this.term = 'spring20';
         this.customFilter();
+    }
+
+    private updatePreferences() {
+        this.storage.get('userData').then(userData => {
+            const userPreferences = {
+                preferences: {
+                    graduateCheckbox: this.graduateCheckbox,
+                    undergraduateCheckbox: this.undergraduateCheckbox,
+                    departmentList: this.departmentList,
+                    instructorList: this.instructorList,
+                    itemsPerPage: this.itemPerPage,
+                    term: this.term
+                },
+                username: userData.username,
+            };
+            this.userService.postUserPreferences(userPreferences)
+                .catch(err => console.log(err));
+        });
+    }
+
+    private getPreferences() {
+        this.storage.get('userData').then(userData => {
+            this.userService.getUserPreferences(userData.username)
+                .then((res: any) => {
+                    const preferences = JSON.parse(res.data[0].preferences);
+                    this.graduateCheckbox = preferences.graduateCheckbox;
+                    this.undergraduateCheckbox = preferences.undergraduateCheckbox;
+                    this.instructorList = preferences.instructorList;
+                    this.departmentList = preferences.departmentList;
+                    this.term = preferences.term;
+                    this.itemPerPage = preferences.itemsPerPage;
+                }).then(() => this.customFilter())
+                .catch(err => console.log(err));
+        });
     }
 }

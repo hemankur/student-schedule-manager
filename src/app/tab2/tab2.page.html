@@ -56,18 +56,18 @@
                 <ion-select placeholder="Select One" [(ngModel)]="term">
                     <ion-select-option value="spring20">Spring 2020</ion-select-option>
                     <ion-select-option value="fall19">Fall 2019</ion-select-option>
-                    <ion-select-option value="spring20">Spring 2019</ion-select-option>
-                    <ion-select-option value="fall19">Fall 2018</ion-select-option>
-                    <ion-select-option value="spring20">Spring 2018</ion-select-option>
-                    <ion-select-option value="fall19">Fall 2017</ion-select-option>
+                    <ion-select-option value="spring19">Spring 2019</ion-select-option>
+                    <ion-select-option value="fall18">Fall 2018</ion-select-option>
+                    <ion-select-option value="spring18">Spring 2018</ion-select-option>
+                    <ion-select-option value="fall17">Fall 2017</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-list>
 
 
         <mat-action-row>
-            <button mat-button (click)="resetFilters()">Reset Filters</button>
-            <button mat-button (click)="customFilter()">Apply!</button>
+            <button mat-button (click)="resetFilters();updatePreferences()">Reset Filters</button>
+            <button mat-button (click)="customFilter();updatePreferences()">Apply!</button>
         </mat-action-row>
     </mat-expansion-panel>
 
