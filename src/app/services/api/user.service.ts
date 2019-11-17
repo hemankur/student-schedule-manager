@@ -17,11 +17,27 @@ export class UserService {
         return this.http.get(SERVER_URL + '/api/users/preferences/' + username).toPromise();
     }
 
+    /**
+     * Update user preferences in the database
+     * @param userData contains username and userPreferences
+     */
     postUserPreferences(userData) {
         return this.http.post(SERVER_URL + '/api/users/preferences', userData).toPromise();
     }
 
+    /**
+     * User login service
+     * @param userData contains username and password
+     */
     userLogin(userData) {
         return this.http.post(SERVER_URL + '/api/user/login/', userData).toPromise();
+    }
+
+    /**
+     * GET request to fetch the courses a user is taking
+     * @param username
+     */
+    getUserCourses(username) {
+        return this.http.get(SERVER_URL + '/api/users/' + username).toPromise();
     }
 }
