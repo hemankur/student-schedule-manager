@@ -7,6 +7,9 @@
 </ion-header>
 
 <ion-content>
+    <ion-button id="day" (click)="changeMode('day')">Day</ion-button>
+    <ion-button id="week" (click)="changeMode('week')">Week</ion-button>
+    <ion-button id="month" (click)="changeMode('month')">Month</ion-button>
     <calendar [eventSource]="eventSource"
               [calendarMode]="calendar.mode"
               [currentDate]="calendar.currentDate"
@@ -24,4 +27,5 @@
                   (onTimeSelected)="onTimeSelected($event)"-->
 
     </calendar>
+
 </ion-content>

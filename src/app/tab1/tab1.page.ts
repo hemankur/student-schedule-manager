@@ -23,6 +23,18 @@ export class Tab1Page implements OnInit {
     constructor(private userService: UserService, private storage: Storage) {
     }
 
+    changeMode(mode) {
+        this.calendar.mode = mode;
+    }
+
+    back() {
+
+    }
+
+    next() {
+
+    }
+
     onCurrentDateChanged($event: Date) {
 
     }
