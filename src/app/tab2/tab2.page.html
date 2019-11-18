@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-title>
             User Details
         </ion-title>
@@ -66,8 +66,8 @@
 
 
         <mat-action-row>
-            <button mat-button (click)="resetFilters();updatePreferences();closePanel()">Reset Filters</button>
-            <button mat-button (click)="customFilter();updatePreferences();closePanel()">Apply!</button>
+            <ion-button fill="outline" mat-button (click)="resetFilters();updatePreferences();closePanel()">Reset Filters</ion-button>&nbsp;&nbsp;
+            <ion-button fill="outline" mat-button (click)="customFilter();updatePreferences();closePanel()">Apply</ion-button>
         </mat-action-row>
     </mat-expansion-panel>
 
