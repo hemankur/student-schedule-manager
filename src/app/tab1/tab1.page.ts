@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {CalendarComponent, IEvent, ITimeSelected} from 'ionic2-calendar/calendar';
 import {UserService} from '../services/api/user.service';
 import {Storage} from '@ionic/storage';
+import {AlertController} from '@ionic/angular';
 
 @Component({
     selector: 'app-tab1',
@@ -19,8 +20,9 @@ export class Tab1Page implements OnInit {
     @ViewChild(CalendarComponent) myCal: CalendarComponent;
     startTime: any;
     endTime: any;
+    viewTitle: string;
 
-    constructor(private userService: UserService, private storage: Storage) {
+    constructor(private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
     }
 
     changeMode(mode) {
@@ -28,11 +30,13 @@ export class Tab1Page implements OnInit {
     }
 
     back() {
-
+        const swiper = document.querySelector('.swiper-container')['swiper'];
+        swiper.slidePrev();
     }
 
     next() {
-
+        const swiper = document.querySelector('.swiper-container')['swiper'];
+        swiper.slideNext();
     }
 
     onCurrentDateChanged($event: Date) {
@@ -43,12 +47,12 @@ export class Tab1Page implements OnInit {
 
     }
 
-    onEventSelected($event: IEvent) {
+    async onEventSelected($event: IEvent) {
 
     }
 
-    onViewTitleChanged($event: string) {
-
+    onViewTitleChanged(title: string) {
+        this.viewTitle = title;
     }
 
     onTimeSelected($event: ITimeSelected) {
@@ -109,5 +113,9 @@ export class Tab1Page implements OnInit {
                     });
             });
 
+    }
+
+    today() {
+        this.calendar.currentDate = new Date();
     }
 }
