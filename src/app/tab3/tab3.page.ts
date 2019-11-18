@@ -26,4 +26,9 @@ export class Tab3Page implements OnInit {
         this.navCtrl.navigateForward('faq')
             .catch(err => console.log(err));
     }
+
+    onClickPersonalInformation() {
+        this.navCtrl.navigateForward('personal')
+            .catch(err => console.log(err));
+    }
 }
