@@ -21,4 +21,9 @@ export class Tab3Page implements OnInit {
 
     ngOnInit(): void {
     }
+
+    onClickFAQ() {
+        this.navCtrl.navigateForward('faq')
+            .catch(err => console.log(err));
+    }
 }

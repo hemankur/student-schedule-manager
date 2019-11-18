@@ -6,6 +6,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {NavController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
 import {UserService} from '../services/api/user.service';
+import {MatExpansionPanel} from '@angular/material/expansion';
 
 @Component({
     selector: 'app-tab2',
@@ -23,6 +24,7 @@ export class Tab2Page implements OnInit {
     dataSource = new MatTableDataSource<any>([]);
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatExpansionPanel) panel: MatExpansionPanel;
 
     public name: string;
     private courseList: any;
@@ -154,5 +156,9 @@ export class Tab2Page implements OnInit {
                 }).then(() => this.customFilter())
                 .catch(err => console.log(err));
         });
+    }
+
+    closePanel() {
+        this.panel.close();
     }
 }
