@@ -1,12 +1,12 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-back-button></ion-back-button>
-    <ion-title>course</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-back-button slot="start"></ion-back-button>
+        <ion-title>course</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-button (click)="register()">Register</ion-button>
-  <ion-button (click)="unregister()">Unregister</ion-button>
+    <ion-button *ngIf="!registered" (click)="register()">Register</ion-button>
+    <ion-button *ngIf="registered" (click)="unregister()">Unregister</ion-button>
 
 </ion-content>

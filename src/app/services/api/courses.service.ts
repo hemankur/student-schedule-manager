@@ -21,4 +21,8 @@ export class CoursesService {
     unregister(userData) {
         return this.http.patch(SERVER_URL + '/api/courses/unregister/', userData).toPromise();
     }
+
+    getRegistrationStatus(username, courseID) {
+        return this.http.get(SERVER_URL + '/api/courses/' + username + '/' + courseID).toPromise();
+    }
 }
