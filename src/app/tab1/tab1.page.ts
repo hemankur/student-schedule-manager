@@ -90,7 +90,7 @@ export class Tab1Page implements OnInit {
                             }
                             for (let i = 0; i < 15; i++) {
                                 const event = {
-                                    title: course.courseName,
+                                    title: course.courseName + ' (' + course.department + course.courseNumber + ')',
                                     desc: course.location,
                                     startTime: new Date(startYear,
                                         startMonth,
