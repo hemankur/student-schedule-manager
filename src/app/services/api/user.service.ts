@@ -41,15 +41,19 @@ export class UserService {
         return this.http.get(SERVER_URL + '/api/users/' + username).toPromise();
     }
 
-    updateAddress(username) {
-        return this.http.patch(SERVER_URL + '/api/users/address/', username).toPromise();
+    getUserData(username) {
+        return this.http.get(SERVER_URL + '/api/users/data' + username);
     }
 
-    updateEmail(username) {
-        return this.http.patch(SERVER_URL + '/api/users/email/', username).toPromise();
+    updateAddress(username, data) {
+        return this.http.patch(SERVER_URL + '/api/users/address/', {username: username, data: data}).toPromise();
     }
 
-    updateEmergency(username) {
-        return this.http.patch(SERVER_URL + '/api/users/emergency/', username).toPromise();
+    updateEmail(username, email) {
+        return this.http.patch(SERVER_URL + '/api/users/email/', {username: username, data: email}).toPromise();
+    }
+
+    updateEmergency(username, data) {
+        return this.http.patch(SERVER_URL + '/api/users/emergency/', {username: username, data: data}).toPromise();
     }
 }
