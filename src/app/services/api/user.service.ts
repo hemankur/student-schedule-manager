@@ -40,4 +40,16 @@ export class UserService {
     getUserCourses(username) {
         return this.http.get(SERVER_URL + '/api/users/' + username).toPromise();
     }
+
+    updateAddress(username) {
+        return this.http.patch(SERVER_URL + '/api/users/address/', username).toPromise();
+    }
+
+    updateEmail(username) {
+        return this.http.patch(SERVER_URL + '/api/users/email/', username).toPromise();
+    }
+
+    updateEmergency(username) {
+        return this.http.patch(SERVER_URL + '/api/users/emergency/', username).toPromise();
+    }
 }
