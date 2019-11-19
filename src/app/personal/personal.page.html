@@ -1,10 +1,33 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-back-button slot="start"></ion-back-button>
-    <ion-title>personal</ion-title>
+    <ion-title>Personal Information</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+  <mat-accordion *ngIf="userData">
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        This is the expansion 1 title {{userData.password}}
+      </mat-expansion-panel-header>
+
+      This the expansion 1 content
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        This is the expansion 2 title
+      </mat-expansion-panel-header>
+
+      This the expansion 2 content
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
 
 </ion-content>

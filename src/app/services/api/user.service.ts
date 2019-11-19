@@ -42,7 +42,7 @@ export class UserService {
     }
 
     getUserData(username) {
-        return this.http.get(SERVER_URL + '/api/users/data' + username);
+        return this.http.get(SERVER_URL + '/api/users/data/' + username).toPromise();
     }
 
     updateAddress(username, data) {

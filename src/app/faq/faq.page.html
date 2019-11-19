@@ -1,10 +1,33 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-back-button slot="start"></ion-back-button>
         <ion-title>faq</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+    <!--<ion-searchbar (keyup)="applyFilter($event.target.value)" mode="ios" animated showCancelButton="always"></ion-searchbar>-->
+    <mat-accordion>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                This is the expansion 1 title
+            </mat-expansion-panel-header>
+
+            This the expansion 1 content
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                This is the expansion 2 title
+            </mat-expansion-panel-header>
+
+            This the expansion 2 content
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
 
 </ion-content>

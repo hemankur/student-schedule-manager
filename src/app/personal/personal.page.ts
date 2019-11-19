@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatExpansionPanel} from '@angular/material/expansion';
+import {UserService} from '../services/api/user.service';
+import {Storage} from '@ionic/storage';
 
 @Component({
-  selector: 'app-personal',
-  templateUrl: './personal.page.html',
-  styleUrls: ['./personal.page.scss'],
+    selector: 'app-personal',
+    templateUrl: './personal.page.html',
+    styleUrls: ['./personal.page.scss'],
 })
 export class PersonalPage implements OnInit {
 
-  constructor() { }
+    constructor(private userService: UserService, private storage: Storage) {
+    }
 
-  ngOnInit() {
-  }
+    @ViewChild(MatExpansionPanel) panel: MatExpansionPanel;
+    userData: any;
+
+    ngOnInit() {
+        this.storage.get('userData').then((userData: any) => {
+            this.userService.getUserData(userData.username)
+                .then((res: any) => {
+                    this.userData = res.data;
+                    console.log(res.data);
+                });
+        }).catch(err => console.log(err));
+
+    }
 
 }
