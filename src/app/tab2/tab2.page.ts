@@ -7,6 +7,7 @@ import {NavController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
 import {UserService} from '../services/api/user.service';
 import {MatExpansionPanel} from '@angular/material/expansion';
+import {IonSearchbar} from '@ionic/react';
 
 @Component({
     selector: 'app-tab2',

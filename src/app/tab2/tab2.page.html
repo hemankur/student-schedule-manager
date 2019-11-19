@@ -71,11 +71,14 @@
         </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-form-field>
+    <!--<mat-form-field>
         <label>
+            <ion-searchbar animated showCancelButton="always"></ion-searchbar>
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
         </label>
-    </mat-form-field>
+    </mat-form-field>-->
+
+    <ion-searchbar (keyup)="applyFilter($event.target.value)" mode="ios" animated showCancelButton="always"></ion-searchbar>
 
     <div class="example-container mat-elevation-z8">
         <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
