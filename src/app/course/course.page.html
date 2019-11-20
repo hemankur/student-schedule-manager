@@ -6,6 +6,11 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-card *ngIf="currentCourse">
+        <ion-card-subtitle>{{currentCourse.department}} {{currentCourse.courseNumber}}</ion-card-subtitle>
+        <ion-card-title>{{currentCourse.courseName}}</ion-card-title>
+        <ion-card-content>{{currentCourse.description}}</ion-card-content>
+    </ion-card>
     <p text-justify *ngIf="course">Time Conflict | {{course.day}} {{course.time}}</p>
     <p text-justify *ngIf="course">This course conflicts with the course {{course.courseName}}
         ({{course.department}} {{course.courseNumber}}) on {{course.day}} at {{course.time}}</p>
@@ -13,7 +18,7 @@
     <p *ngIf="course">Click the button below to drop {{course.department}} {{course.courseNumber}} and register for
         {{course.courseName}} ({{currentCourse.department}} {{currentCourse.courseNumber}})</p>
 
-    <ion-button *ngIf="!registered" (click)="register()">Register</ion-button>
-    <ion-button *ngIf="registered" (click)="unregister()">Unregister</ion-button>
+    <ion-button *ngIf="!registered && !conflict" (click)="register()">Register</ion-button>
+    <ion-button *ngIf="registered" (click)="drop()">Drop</ion-button>
 
 </ion-content>

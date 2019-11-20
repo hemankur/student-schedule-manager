@@ -73,22 +73,33 @@ export class Tab1Page implements OnInit {
                             if (course.term === 'Spring20') {
                                 startMonth = 0;
                                 startYear = 2020;
+                                if (course.day === 'M') {
+                                    startDate = 13;
+                                } else if (course.day === 'T') {
+                                    startDate = 14;
+                                } else if (course.day === 'W') {
+                                    startDate = 15;
+                                } else if (course.day === 'R') {
+                                    startDate = 16;
+                                } else if (course.day === 'F') {
+                                    startDate = 17;
+                                }
                             } else if (course.term === 'Fall19') {
                                 startMonth = 7;
                                 startYear = 2019;
+                                if (course.day === 'M') {
+                                    startDate = 19;
+                                } else if (course.day === 'T') {
+                                    startDate = 20;
+                                } else if (course.day === 'W') {
+                                    startDate = 21;
+                                } else if (course.day === 'R') {
+                                    startDate = 22;
+                                } else if (course.day === 'F') {
+                                    startDate = 23;
+                                }
                             }
-                            if (course.day === 'M') {
-                                startDate = 13;
-                            } else if (course.day === 'T') {
-                                startDate = 14;
-                            } else if (course.day === 'W') {
-                                startDate = 15;
-                            } else if (course.day === 'R') {
-                                startDate = 16;
-                            } else if (course.day === 'F') {
-                                startDate = 17;
-                            }
-                            for (let i = 0; i < 15; i++) {
+                            for (let i = 0; i <= 16; i++) {
                                 const event = {
                                     title: course.courseName + ' (' + course.department + course.courseNumber + ')',
                                     desc: course.location,
