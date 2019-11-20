@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {UserService} from '../services/api/user.service';
 import {Storage} from '@ionic/storage';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
     selector: 'app-welcome',
@@ -12,6 +13,7 @@ export class WelcomePage implements OnInit {
 
     private username: string;
     private password: string;
+    private showError: boolean;
 
     constructor(private navCtrl: NavController, private userService: UserService, private storage: Storage) {
     }
@@ -26,6 +28,10 @@ export class WelcomePage implements OnInit {
                 }
             });
 
+    }
+
+    ionViewDidEnter() {
+        this.showError = false;
     }
 
     login() {
@@ -48,9 +54,12 @@ export class WelcomePage implements OnInit {
                         }).catch(err => {
                         console.log(err);
                     });
+                } else {
+                    this.showError = true;
                 }
             })
             .catch(err => {
+                this.showError = true;
                 console.log(err);
             });
         // ok comment

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import {LocalNotifications} from '@ionic-native/local-notifications';
 
 import { IonicModule } from '@ionic/angular';
 
