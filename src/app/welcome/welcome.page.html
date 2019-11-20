@@ -5,10 +5,12 @@
 </ion-header>
 
 <ion-content padding>
+    <div class="loginform">
     <ion-input class="un" align="center" placeholder="username" id="login-username" [(ngModel)]="username"></ion-input>
     <ion-input class="pass" align="center" type="password" placeholder="password" id="login-password"
                [(ngModel)]="password"></ion-input>
     <ion-button expand="full" (click)="login()" id="login-button">Log in</ion-button>
     <p *ngIf="showError">Incorrect username or password!</p>
     <!--<ion-button align="center" (click)="navCtrl.navigateForward('/tabs/tab2')">Debug Continue</ion-button>-->
+    </div>
 </ion-content>

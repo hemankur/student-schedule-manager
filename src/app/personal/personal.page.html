@@ -1,33 +1,49 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-back-button slot="start"></ion-back-button>
-    <ion-title>Personal Information</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-back-button slot="start"></ion-back-button>
+        <ion-title>Personal Information</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <mat-accordion *ngIf="userData">
+    <div *ngIf="userData">
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        This is the expansion 1 title {{userData.password}}
-      </mat-expansion-panel-header>
+        <ion-card>
+            <ion-card-header>
 
-      This the expansion 1 content
+                <ion-card-subtitle></ion-card-subtitle>
+                <ion-card-title>{{userData.displayName}}<ion-icon name="create" (click)="onClickEdit()"></ion-icon></ion-card-title>
 
-    </mat-expansion-panel>
+            </ion-card-header>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        This is the expansion 2 title
-      </mat-expansion-panel-header>
+            <ion-card-content>
+                <p>Address:</p>
+                {{userData.houseNumber}}
+                {{userData.street}}
+                {{userData.city}}
+                {{userData.state}}
+                {{userData.zipCode}}
+                {{userData.country}}
+                <p>Email:</p>
+                {{userData.email}}
+                <p>Phone:</p>
+                {{userData.phone}}
+                <p>Emergency Contact -</p>
+                Name: {{userData.emergencyName}}
+                <br>
+                Phone: {{userData.emergencyNumber}}
 
-      This the expansion 2 content
 
-    </mat-expansion-panel>
 
-  </mat-accordion>
+
+            </ion-card-content>
+        </ion-card>
+
+
+
+
+    </div>
 
 
 </ion-content>

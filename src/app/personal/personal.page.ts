@@ -24,7 +24,9 @@ export class PersonalPage implements OnInit {
                     console.log(res.data);
                 });
         }).catch(err => console.log(err));
-
     }
 
+    onClickEdit() {
+
+    }
 }
