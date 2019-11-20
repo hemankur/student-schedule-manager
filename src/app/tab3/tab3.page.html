@@ -10,4 +10,14 @@
     <ion-button (click)="logout()">Logout</ion-button>
     <ion-button (click)="onClickFAQ()">FAQs</ion-button>
     <ion-button (click)="onClickPersonalInformation()">Personal Information</ion-button>
+
+    <ion-list>
+        <ion-item lines="full">
+            <ion-icon slot="start" name="moon"></ion-icon>
+            <ion-label>
+                Toggle Dark Theme
+            </ion-label>
+            <ion-toggle id="themeToggle" slot="end"></ion-toggle>
+        </ion-item>
+    </ion-list>
 </ion-content>

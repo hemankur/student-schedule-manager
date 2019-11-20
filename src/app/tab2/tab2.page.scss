@@ -15,4 +15,10 @@ th {
   color: #022340;
 }
 
+tr:nth-child(odd) {
+  background-color: #FFFFFF;
+}
 
+tr:nth-child(even) {
+  background-color: #D9FFB4;
+}
