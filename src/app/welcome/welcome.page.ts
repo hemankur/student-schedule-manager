@@ -17,6 +17,14 @@ export class WelcomePage implements OnInit {
     }
 
     ngOnInit() {
+        this.storage.get('userData')
+            .then(userData => {
+                if (userData !== null) {
+                    console.log(userData);
+                    this.navCtrl.navigateForward('tabs/tab1')
+                        .catch(err => console.log(err));
+                }
+            });
 
     }
 

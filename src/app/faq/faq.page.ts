@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatExpansionPanel} from '@angular/material/expansion';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import {IonSearchbar} from '@ionic/angular';
 
 @Component({
     selector: 'app-faq',
