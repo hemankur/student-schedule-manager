@@ -19,10 +19,10 @@ export class CoursePage implements OnInit {
 
     ngOnInit() {
         this.storage.get('courseDetails').then(course => {
+            this.currentCourse = course;
             this.storage.get('userData').then(userData => {
                 this.coursesService.checkForConflict(userData.username, course.courseID)
                     .then((res: any) => {
-                        this.currentCourse = course;
                         if (res.error === 'Conflict') {
                             this.conflict = true;
                             this.course = res.data.course;
@@ -58,7 +58,7 @@ export class CoursePage implements OnInit {
         });
     }
 
-    unregister() {
+    drop() {
         this.storage.get('userData').then(userData => {
             this.storage.get('courseDetails').then(course => {
                 this.coursesService.unregister({sid: userData.username, courseID: course.courseID})
