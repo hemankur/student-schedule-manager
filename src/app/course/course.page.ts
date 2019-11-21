@@ -21,7 +21,7 @@ export class CoursePage implements OnInit {
         this.storage.get('courseDetails').then(course => {
             this.currentCourse = course;
             this.storage.get('userData').then(userData => {
-                this.coursesService.checkForConflict(userData.username, course.courseID)
+                this.coursesService.checkForConflict(userData.username, course.courseID, course.term)
                     .then((res: any) => {
                         if (res.error === 'Conflict') {
                             this.conflict = true;
@@ -42,7 +42,7 @@ export class CoursePage implements OnInit {
     register() {
         this.storage.get('userData').then(userData => {
             this.storage.get('courseDetails').then(course => {
-                this.coursesService.register({sid: userData.username, courseID: course.courseID})
+                this.coursesService.register({sid: userData.username, courseID: course.courseID, term: course.term})
                     .then((res: any) => {
                         console.log(res);
                         if (!res.error) {

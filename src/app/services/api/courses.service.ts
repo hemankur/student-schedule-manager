@@ -26,7 +26,7 @@ export class CoursesService {
         return this.http.get(SERVER_URL + '/api/courses/' + username + '/' + courseID).toPromise();
     }
 
-    checkForConflict(username, courseID) {
-        return this.http.post(SERVER_URL + '/api/courses/check', {sid: username, courseID: courseID}).toPromise();
+    checkForConflict(username, courseID, term) {
+        return this.http.post(SERVER_URL + '/api/courses/check', {sid: username, courseID: courseID, term: term}).toPromise();
     }
 }
