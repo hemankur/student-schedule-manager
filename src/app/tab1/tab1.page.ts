@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {CalendarComponent, IEvent, ITimeSelected} from 'ionic2-calendar/calendar';
 import {UserService} from '../services/api/user.service';
 import {Storage} from '@ionic/storage';
-import {AlertController} from '@ionic/angular';
+import {AlertController, NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-tab1',
@@ -22,7 +22,7 @@ export class Tab1Page implements OnInit {
     endTime: any;
     viewTitle: string;
 
-    constructor(private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
+    constructor(private userService: UserService, private storage: Storage, private navController: NavController) {
     }
 
     changeMode(mode) {
@@ -47,8 +47,18 @@ export class Tab1Page implements OnInit {
 
     }
 
-    async onEventSelected($event: IEvent) {
-
+    async onEventSelected(ev) {
+        console.log(ev.desc);
+        this.storage.set('courseDetails', ev.desc)
+            .then(() => {
+                this.navController.navigateForward('course')
+                    .catch(err => {
+                        console.log(err);
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     onViewTitleChanged(title: string) {
@@ -101,8 +111,10 @@ export class Tab1Page implements OnInit {
                             }
                             for (let i = 0; i <= 16; i++) {
                                 const event = {
-                                    title: course.courseName + ' (' + course.department + course.courseNumber + ')',
-                                    desc: course.location,
+                                    title: course.courseName + ' (' + course.department + course.courseNumber + ') | ' +
+                                        course.location.split(' ')[0][0] + course.location.split(' ')[1][0] +
+                                        course.location.split(' ')[2],
+                                    desc: course,
                                     startTime: new Date(startYear,
                                         startMonth,
                                         startDate + (i * 7),
