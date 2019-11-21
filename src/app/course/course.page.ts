@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {CoursesService} from '../services/api/courses.service';
+import {ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-course',
@@ -9,7 +10,7 @@ import {CoursesService} from '../services/api/courses.service';
 })
 export class CoursePage implements OnInit {
 
-    constructor(private storage: Storage, private coursesService: CoursesService) {
+    constructor(private storage: Storage, private coursesService: CoursesService, private toastController: ToastController) {
     }
 
     private registered: boolean;
@@ -68,6 +69,9 @@ export class CoursePage implements OnInit {
                         console.log(res);
                         if (!res.error) {
                             this.registered = false;
+                            this.presentToast('Undo',
+                                'Click to cancel dropping ' +
+                                course.department + course.courseNumber, course);
                         }
                     })
                     .catch(err => {
@@ -85,5 +89,45 @@ export class CoursePage implements OnInit {
                 console.log(res);
                 this.conflict = false;
             });
+    }
+
+    async presentToast(header, message, course) {
+        const toast = await this.toastController.create({
+            header: header,
+            message: message,
+            position: 'bottom',
+            duration: 2000,
+            buttons: [
+                {
+                    side: 'end',
+                    icon: 'undo',
+                    text: 'Undo',
+                    handler: () => {
+                        this.coursesService.register({sid: this.userData.username, courseID: course.courseID, term: course.term})
+                            .then((res: any) => {
+                                console.log(res);
+                                if (!res.error) {
+                                    this.registered = true;
+                                    this.presentToastAfterUndo();
+                                }
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    }
+                }
+            ]
+        });
+        toast.present();
+    }
+
+    async presentToastAfterUndo() {
+        const toast = await this.toastController.create({
+            header: 'Success',
+            message: 'Course Not Dropped',
+            position: 'bottom',
+            duration: 2000,
+        });
+        toast.present();
     }
 }
