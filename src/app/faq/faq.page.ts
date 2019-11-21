@@ -16,17 +16,24 @@ export class FaqPage implements OnInit {
     }
 
     private faqData = [{
-        question: 'Question 1',
-        answer: 'Answer 1'
+        question: 'How do I change the calender view?',
+        answer: 'To change the view mode of the calender, click on the top buttons saying "Day", "Week" or "Month"'
     }, {
-        question: 'Question 2',
-        answer: 'I don\'t know'
+        question: 'How can I apply advanced filters on the course page?',
+        answer: 'To apply advanced filters on the course page, click on the "Filters" tab on the top of the page ' +
+            'and select the filters you want. To apply the changes, click the apply button on the bottom of the page.'
     }, {
-      question: 'Question 3',
-      answer: 'Make something up!'
+        question: 'Can I revert the filters I selected?',
+        answer: 'Yes. To revert the filters, click on the "Revert" button inside the advanced filters tab.'
     }, {
-      question: 'Question 4',
-      answer: '4 Works too!'
+        question: 'Is there a dark mode for the app?',
+        answer: 'Yes! You can access the dark mode inside the 3rd tab. "Settings"'
+    }, {
+        question: 'How do I change the default term?',
+        answer: 'To change the default term, go to the "Settings" tab and click "default term".'
+    }, {
+        question: 'How can I update my Personal Information?',
+        answer: 'To update your personal information, go to the "Settings" tab and select "Personal Information"'
     }];
 
     private filterData = this.faqData;
