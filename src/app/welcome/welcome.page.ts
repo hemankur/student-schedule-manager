@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController} from '@ionic/angular';
+import {NavController, ToastController} from '@ionic/angular';
 import {UserService} from '../services/api/user.service';
 import {Storage} from '@ionic/storage';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
     selector: 'app-welcome',
@@ -15,7 +14,8 @@ export class WelcomePage implements OnInit {
     private password: string;
     private showError: boolean;
 
-    constructor(private navCtrl: NavController, private userService: UserService, private storage: Storage) {
+    constructor(private navCtrl: NavController, private userService: UserService,
+                private storage: Storage, private toastController: ToastController) {
     }
 
     ngOnInit() {
@@ -43,7 +43,6 @@ export class WelcomePage implements OnInit {
         console.log(userData);
         this.userService.userLogin(userData)
             .then((data: any) => {
-                console.log(data);
                 if (data.message === 'success') {
                     this.storage.set('userData', userData)
                         .then(() => {
@@ -57,11 +56,20 @@ export class WelcomePage implements OnInit {
                 } else {
                     this.showError = true;
                 }
-            })
-            .catch(err => {
-                this.showError = true;
-                console.log(err);
-            });
+            }).catch(err => {
+            this.showError = true;
+            this.presentToast(err.error.error, err.error.message);
+        });
         // ok comment
+    }
+
+    async presentToast(header, message) {
+        const toast = await this.toastController.create({
+            header: header,
+            message: message,
+            position: 'bottom',
+            duration: 2000
+        });
+        toast.present();
     }
 }
