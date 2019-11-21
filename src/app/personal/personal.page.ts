@@ -19,14 +19,7 @@ export class PersonalPage implements OnInit {
     private editMode = false;
 
     ngOnInit() {
-        this.storage.get('userData').then((userData: any) => {
-            this.userService.getUserData(userData.username)
-                .then((res: any) => {
-                    this.userData = res.data;
-                    this.backupUserData = res.data;
-                    console.log(res.data);
-                });
-        }).catch(err => console.log(err));
+        this.getPersonalInformation();
     }
 
     toggleEdit() {
@@ -42,7 +35,18 @@ export class PersonalPage implements OnInit {
     }
 
     onClickCancel() {
-        this.userData = this.backupUserData;
+        this.getPersonalInformation();
         this.editMode = !this.editMode;
+    }
+
+    getPersonalInformation() {
+        this.storage.get('userData').then((userData: any) => {
+            this.userService.getUserData(userData.username)
+                .then((res: any) => {
+                    this.userData = res.data;
+                    this.backupUserData = res.data;
+                    console.log(res.data);
+                });
+        }).catch(err => console.log(err));
     }
 }
