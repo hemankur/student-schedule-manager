@@ -31,4 +31,8 @@ export class Tab3Page implements OnInit {
         this.navCtrl.navigateForward('personal')
             .catch(err => console.log(err));
     }
+
+    onDarkModeToggle(ev) {
+        document.body.classList.toggle('dark', ev.detail.checked);
+    }
 }
