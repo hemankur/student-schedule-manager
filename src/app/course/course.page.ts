@@ -16,11 +16,13 @@ export class CoursePage implements OnInit {
     private conflict: boolean;
     private currentCourse: any;
     private course: any;
+    private userData: any;
 
     ngOnInit() {
         this.storage.get('courseDetails').then(course => {
             this.currentCourse = course;
             this.storage.get('userData').then(userData => {
+                this.userData = userData;
                 this.coursesService.checkForConflict(userData.username, course.courseID, course.term)
                     .then((res: any) => {
                         if (res.error === 'Conflict') {
@@ -75,5 +77,13 @@ export class CoursePage implements OnInit {
         }).catch(err => {
             console.log(err);
         });
+    }
+
+    dropConflictCourse(conflictCourse) {
+        this.coursesService.unregister({sid: this.userData.username, courseID: conflictCourse.courseID})
+            .then(res => {
+                console.log(res);
+                this.conflict = false;
+            });
     }
 }
