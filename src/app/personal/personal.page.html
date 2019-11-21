@@ -9,20 +9,20 @@
 
     <div *ngIf="userData">
 
-        <ion-card>
+        <ion-card *ngIf="!editMode">
             <ion-card-header>
-
                 <ion-card-subtitle></ion-card-subtitle>
-                <ion-card-title>{{userData.displayName}}<ion-icon name="create" (click)="onClickEdit()"></ion-icon></ion-card-title>
-
+                <ion-card-title>{{userData.displayName}}
+                    <ion-icon name="create" (click)="toggleEdit()"></ion-icon>
+                </ion-card-title>
             </ion-card-header>
 
             <ion-card-content>
                 <p>Address:</p>
                 {{userData.houseNumber}}
-                {{userData.street}}
-                {{userData.city}}
-                {{userData.state}}
+                {{userData.street}},
+                {{userData.city}},
+                {{userData.state}},
                 {{userData.zipCode}}
                 {{userData.country}}
                 <p>Email:</p>
@@ -33,17 +33,82 @@
                 Name: {{userData.emergencyName}}
                 <br>
                 Phone: {{userData.emergencyNumber}}
+            </ion-card-content>
+        </ion-card>
 
+        <ion-card *ngIf="editMode">
+            <ion-card-header>
+                <ion-card-subtitle></ion-card-subtitle>
+                <ion-card-title>{{userData.displayName}}
+                    <ion-icon name="create" (click)="toggleEdit()"></ion-icon>
+                </ion-card-title>
+            </ion-card-header>
 
+            <ion-card-content>
+                <ion-item-group>
+                    <ion-item-divider>
+                        <ion-label>Address</ion-label>
+                    </ion-item-divider>
+                    <ion-item>
+                        <ion-label position="stacked">House Number</ion-label>
+                        <ion-input clearInput type="number" maxlength="5"
+                                   [(ngModel)]="userData.houseNumber"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Street</ion-label>
+                        <ion-input clearInput [(ngModel)]="userData.street"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">City</ion-label>
+                        <ion-input clearInput [(ngModel)]="userData.city"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">State</ion-label>
+                        <ion-input clearInput [(ngModel)]="userData.state"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Zip Code</ion-label>
+                        <ion-input clearInput [(ngModel)]="userData.zipCode"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Country</ion-label>
+                        <ion-input clearInput [(ngModel)]="userData.country"></ion-input>
+                    </ion-item>
+                </ion-item-group>
+
+                <ion-item-group>
+                    <ion-item-divider>
+                        <ion-label>Personal Information</ion-label>
+                    </ion-item-divider>
+                    <ion-item>
+                        <ion-label position="stacked">Email</ion-label>
+                        <ion-input clearInput type="email" [(ngModel)]="userData.email"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Phone</ion-label>
+                        <ion-input clearInput type="tel" maxlength="10" [(ngModel)]="userData.phone"></ion-input>
+                    </ion-item>
+                </ion-item-group>
+
+                <ion-item-group>
+                    <ion-item-divider>
+                        <ion-label>Emergency Contact Information</ion-label>
+                    </ion-item-divider>
+                    <ion-item>
+                        <ion-label position="stacked">Name</ion-label>
+                        <ion-input clearInput [(ngModel)]="userData.emergencyName"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Phone</ion-label>
+                        <ion-input clearInput type="tel" maxlength="10"
+                                   [(ngModel)]="userData.emergencyNumber"></ion-input>
+                    </ion-item>
+                </ion-item-group>
+                <ion-button type="clear" (click)="onClickCancel()">Cancel</ion-button>
+                <ion-button type="clear" (click)="saveChanges()">Save</ion-button>
 
 
             </ion-card-content>
         </ion-card>
-
-
-
-
     </div>
-
-
 </ion-content>
