@@ -11,7 +11,7 @@
         <ion-card-title>{{currentCourse.courseName}}</ion-card-title>
         <ion-card-content text-justify>{{currentCourse.description}}</ion-card-content>
     </ion-card>
-    
+
     <p text-justify *ngIf="course && conflict">Time Conflict | {{course.day}} {{course.time}} with {{course.courseName}}
         ({{course.department}} {{course.courseNumber}})</p>
 

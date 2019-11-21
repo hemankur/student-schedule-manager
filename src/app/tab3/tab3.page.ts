@@ -8,6 +8,7 @@ import {NavController} from '@ionic/angular';
     styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
+    term = 'spring20';
     constructor(private storage: Storage, private navCtrl: NavController) {
     }
 
@@ -34,5 +35,9 @@ export class Tab3Page implements OnInit {
 
     onDarkModeToggle(ev) {
         document.body.classList.toggle('dark', ev.detail.checked);
+    }
+
+    onClickChangeDefaultTerm() {
+
     }
 }
