@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavController, ToastController} from '@ionic/angular';
 import {UserService} from '../services/api/user.service';
 import {Storage} from '@ionic/storage';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
     selector: 'app-welcome',
@@ -58,9 +59,12 @@ export class WelcomePage implements OnInit {
                 }
             }).catch(err => {
             this.showError = true;
-            this.presentToast(err.error.error, err.error.message);
+            if (err.error.error) {
+                this.presentToast(err.error.error, err.error.message);
+            } else {
+                this.presentToast('Server Offline.', 'Sorry for the inconvenience. Please try later.');
+            }
         });
-        // ok comment
     }
 
     async presentToast(header, message) {
@@ -68,7 +72,7 @@ export class WelcomePage implements OnInit {
             header: header,
             message: message,
             position: 'bottom',
-            duration: 2000
+            duration: 2200
         });
         toast.present();
     }
