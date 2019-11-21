@@ -96,7 +96,7 @@ export class CoursePage implements OnInit {
             header: header,
             message: message,
             position: 'bottom',
-            duration: 2000,
+            duration: 4000,
             buttons: [
                 {
                     side: 'end',
