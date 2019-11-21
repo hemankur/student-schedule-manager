@@ -9,16 +9,19 @@
     <ion-card *ngIf="currentCourse">
         <ion-card-subtitle>{{currentCourse.department}} {{currentCourse.courseNumber}}</ion-card-subtitle>
         <ion-card-title>{{currentCourse.courseName}}</ion-card-title>
-        <ion-card-content>{{currentCourse.description}}</ion-card-content>
+        <ion-card-content text-justify>{{currentCourse.description}}</ion-card-content>
     </ion-card>
-    <p text-justify *ngIf="course">Time Conflict | {{course.day}} {{course.time}}</p>
-    <p text-justify *ngIf="course">This course conflicts with the course {{course.courseName}}
-        ({{course.department}} {{course.courseNumber}}) on {{course.day}} at {{course.time}}</p>
+    
+    <p text-justify *ngIf="course && conflict">Time Conflict | {{course.day}} {{course.time}} with {{course.courseName}}
+        ({{course.department}} {{course.courseNumber}})</p>
 
-    <p *ngIf="course">Click the button below to drop {{course.department}} {{course.courseNumber}} and register for
-        {{course.courseName}} ({{currentCourse.department}} {{currentCourse.courseNumber}})</p>
+    <ion-button *ngIf="conflict && course" (click)="dropConflictCourse(course)">
+        Drop {{course.department}} {{course.courseNumber}}</ion-button>
 
-    <ion-button *ngIf="!registered && !conflict" (click)="register()">Register</ion-button>
-    <ion-button *ngIf="registered" (click)="drop()">Drop</ion-button>
+    <ion-button *ngIf="!registered && !conflict && currentCourse" (click)="register()">Register
+        for {{currentCourse.department}} {{currentCourse.courseNumber}}</ion-button>
+
+    <ion-button *ngIf="registered && currentCourse" (click)="drop()">
+        Drop {{currentCourse.department}} {{currentCourse.courseNumber}}</ion-button>
 
 </ion-content>
